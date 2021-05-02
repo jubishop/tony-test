@@ -1,6 +1,6 @@
 module Tony
   module Test
-    module RSpec
+    module Rack
       module Cookies
         def set_cookie(name, value)
           crypt = Tony::Utils::Crypt.new(cookie_secret)
