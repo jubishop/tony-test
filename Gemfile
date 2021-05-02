@@ -1,5 +1,9 @@
 ruby '>= 3'
 
+source 'https://www.jubigems.org' do
+  gem 'tony'
+end
+
 # defaults
 group :development do
   source 'https://www.rubygems.org' do
