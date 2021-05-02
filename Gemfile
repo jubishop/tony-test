@@ -7,6 +7,7 @@ end
 # defaults
 group :development do
   source 'https://www.rubygems.org' do
+    gem 'capybara'
     gem 'rake'
     gem 'rbs'
     gem 'rubocop'
