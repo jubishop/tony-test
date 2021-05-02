@@ -11,6 +11,10 @@ module Tony
           crypt = Tony::Utils::Crypt.new(cookie_secret)
           return crypt.de(rack_mock_session.cookie_jar[name])
         end
+
+        def delete_cookie(name)
+          rack_mock_session.cookie_jar.delete(name)
+        end
       end
     end
   end
