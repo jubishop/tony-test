@@ -1,5 +1,5 @@
 require 'capybara/rspec'
-require 'rack-test'
+require 'rack/test'
 require 'rspec'
 
 RSpec.shared_context(:tony_rack_test) do
