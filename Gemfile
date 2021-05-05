@@ -1,15 +1,10 @@
 ruby '>= 3'
 
-source 'https://www.jubigems.org' do
-  gem 'tony'
-end
-
-# defaults
 group :development do
   source 'https://www.rubygems.org' do
     gem 'capybara'
+    gem 'rack-test'
     gem 'rake'
-    gem 'rbs'
     gem 'rubocop'
     gem 'rubocop-performance'
     gem 'rubocop-rake'
@@ -18,6 +13,7 @@ group :development do
 
   source 'https://www.jubigems.org' do
     gem 'rakegem'
+    gem 'tony'
   end
 end
 
