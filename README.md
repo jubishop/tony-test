@@ -40,7 +40,7 @@ RSpec.shared_context(:rack_test) {
 Now in any individual `_spec.rb` test file:
 
 ```ruby
-# type: :rack_test will pull in the helpers.
+# `type: :rack_test` will pull in the helpers for rack-test.
 RSpec.describe(MyTonyApp, type: :rack_test) {
   it('does something') {
     # You can set cookies
@@ -82,7 +82,7 @@ Now in any individual `_spec.rb` test file:
 
 ```ruby
 
-# type: :apparition will pull in the helpers for apparition.
+# `type: :apparition` will pull in the helpers for apparition.
 RSpec.describe(MyTonyApp, type: :apparition) {
   it('does something') {
     # You can set cookies
