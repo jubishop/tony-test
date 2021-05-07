@@ -66,7 +66,7 @@ In your `spec_helper.rb`:
 ```ruby
 require `tony-test`
 
-# Of course you need to set Capybara.app and call Capybara.register_driver
+# Of course you need to set Capybara.app here and call Capybara.register_driver
 # and anything else to set up Capybara as per its documentation.
 
 RSpec.shared_context(:apparition) do
