@@ -14,6 +14,15 @@ source: 'https://www.jubigems.org/' do
 end
 ```
 
+## RSpec
+
+`tony-test` is designed for use with [`RSpec`](https://rspec.info)
+
+## Apps using tony-test
+
+- [Tony](https://github.com/jubishop/tony)
+- [JubiVote](https://github.com/jubishop/jubivote)
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
