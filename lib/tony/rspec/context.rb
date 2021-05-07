@@ -2,7 +2,7 @@ require 'capybara/rspec'
 require 'rack/test'
 require 'rspec'
 
-RSpec.shared_context(:tony_rack_test) do
+RSpec.shared_context(:tony_rack_test) {
   include Capybara::RSpecMatchers
   include Rack::Test::Methods
   include Tony::Test::Rack::Cookies
@@ -10,4 +10,4 @@ RSpec.shared_context(:tony_rack_test) do
   after(:each) {
     clear_cookies
   }
-end
+}
