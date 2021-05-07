@@ -1,6 +1,6 @@
 # tony-test
 
-[![RSpec Status](https://github.com/jubishop/tony-test/workflows/RSpec/badge.svg)](https://github.com/jubishop/tony-test/actions/workflows/rspec.yml)  [![Rubocop Status](https://github.com/jubishop/tony-test/workflows/Rubocop/badge.svg)](https://github.com/jubishop/tony-test/actions/workflows/rubocop.yml)
+[![Rubocop Status](https://github.com/jubishop/tony-test/workflows/Rubocop/badge.svg)](https://github.com/jubishop/tony-test/actions/workflows/rubocop.yml)
 
 Helpers for testing Tony.
 
