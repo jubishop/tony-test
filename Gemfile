@@ -1,9 +1,16 @@
 ruby '>= 3'
 
+source 'https://www.rubygems.org' do
+  gem 'capybara'
+  gem 'puma'
+  gem 'rack'
+  gem 'rack-contrib'
+  gem 'rack-test'
+  gem 'rspec'
+end
+
 group :development do
   source 'https://www.rubygems.org' do
-    gem 'capybara'
-    gem 'rack-test'
     gem 'rake'
     gem 'rubocop'
     gem 'rubocop-performance'

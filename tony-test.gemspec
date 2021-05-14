@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name          = 'tony-test'
-  spec.version       = '0.13'
+  spec.version       = '0.14'
   spec.summary       = %q(Helpers for testing Tony.)
   spec.authors       = ['Justin Bishop']
   spec.email         = ['jubishop@gmail.com']
@@ -14,4 +14,10 @@ Gem::Specification.new do |spec|
     'source_code_uri' => 'https://github.com/jubishop/tony-test'
   }
   spec.required_ruby_version = Gem::Requirement.new('>= 3.0')
+  spec.add_runtime_dependency('capybara')
+  spec.add_runtime_dependency('puma')
+  spec.add_runtime_dependency('rack')
+  spec.add_runtime_dependency('rack-contrib')
+  spec.add_runtime_dependency('rack-test')
+  spec.add_runtime_dependency('rspec')
 end
