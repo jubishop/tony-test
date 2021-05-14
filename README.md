@@ -102,6 +102,27 @@ RSpec.describe(MyTonyApp, type: :apparition) {
 }
 ```
 
+### Screenshot Goldens
+
+`tony-test` offers a system for storing "golden" screenshots of your app which it can confirm haven't changed during a test run.  If they have changed, it then launches its own local `Tony` webserver and opens a browser where you can review those changes and choose whether to accept the new images as the new goldens.  If you accept, it copies the new image into your git repo, overwriting the original.
+
+Example usage:
+
+```ruby
+RSpec.describe(Poll, type: :feature) {
+  # Second param is the folder of your goldens, defaults to `spec/goldens`.
+  let(:goldens) { Tony::Test::Goldens::Page.new(page) }
+
+  visit('/')
+
+  # Checks for a golden image in `spec/goldens/index_page.png`.
+  # If none exists (your first run), it will create one for you.
+  goldens.verify('index_page')
+}
+```
+
+See [`poll_spec`](https://github.com/jubishop/jubivote/blob/main/spec/apparition/poll_spec.rb) in [`JubiVote`](https://github.com/jubishop/jubivote) for a detailed example of this being used.
+
 ## Apps using tony-test
 
 - [Tony](https://github.com/jubishop/tony)
