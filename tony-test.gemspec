@@ -1,12 +1,12 @@
 Gem::Specification.new do |spec|
   spec.name          = 'tony-test'
-  spec.version       = '0.14'
+  spec.version       = '0.15'
   spec.summary       = %q(Helpers for testing Tony.)
   spec.authors       = ['Justin Bishop']
   spec.email         = ['jubishop@gmail.com']
   spec.homepage      = 'https://github.com/jubishop/tony-test'
   spec.license       = 'MIT'
-  spec.files         = Dir['lib/**/*.rb']
+  spec.files         = Dir['lib/**/*.*']
   spec.require_paths = ['lib']
   spec.bindir        = 'bin'
   spec.executables   = []
