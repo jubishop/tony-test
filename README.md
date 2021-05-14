@@ -104,7 +104,7 @@ RSpec.describe(MyTonyApp, type: :apparition) {
 
 ### Screenshot Goldens
 
-`tony-test` offers a system for storing "golden" screenshots of your app which it can test for changes during a test run.  (Note, these will automatically skip execution when running inside Github Actions, since the screenshots will differ).  If they have changed, it then launches its own local `Tony` webserver and opens a browser where you can review those changes and choose whether to accept the new images as the new goldens.  If you accept, it copies the new image into your git repo, overwriting the original.
+`tony-test` offers a system for storing "golden" screenshots of your app which it can test for changes during a test run.  (Note, these will automatically skip execution when running inside Github Actions, since the screenshots will differ).  If any screenshots have changed, it will launch its own local `Tony` webserver and open a browser where you can review those changes and choose whether to accept the new images as the new goldens.  If you accept, it will copy the new image into your git repo, overwriting the original.
 
 Example usage:
 
