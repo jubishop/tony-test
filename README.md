@@ -10,6 +10,7 @@ Helpers for testing [Tony](https://github.com/jubishop/tony).
 
 ```ruby
 source: 'https://www.jubigems.org/' do
+  gem 'core-test'
   gem 'tony-test'
 end
 ```
@@ -35,6 +36,10 @@ RSpec.shared_context(:rack_test) {
     # Return the same cookie secret string the app will be using.
   }
 }
+
+RSpec.configure do |config|
+  config.include_context(:rack_test, type: :rack_test)
+end
 ```
 
 Now in any individual `_spec.rb` test file:
@@ -77,14 +82,18 @@ RSpec.shared_context(:apparition) do
     # Return the same cookie secret string the app will be using.
   }
 end
+
+RSpec.configure do |config|
+  config.include_context(:apparition, type: :feature)
+end
 ```
 
 Now in any individual `_spec.rb` test file:
 
 ```ruby
 
-# `type: :apparition` will pull in the helpers for apparition.
-RSpec.describe(MyTonyApp, type: :apparition) {
+# `type: :feature` will pull in all the helpers for apparition.
+RSpec.describe(MyTonyApp, type: :feature) {
   it('does something') {
     # You can set cookies
     set_cookie(:key, 'value')
