@@ -2,6 +2,7 @@ ruby '>= 3'
 
 source 'https://www.rubygems.org' do
   gem 'capybara'
+  gem 'colorize'
   gem 'puma'
   gem 'rack'
   gem 'rack-contrib'
