@@ -1,3 +1,4 @@
+require 'core/test'
 require 'colorize'
 
 module Tony

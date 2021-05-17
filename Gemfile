@@ -10,6 +10,11 @@ source 'https://www.rubygems.org' do
   gem 'rspec'
 end
 
+source 'https://www.jubigems.org' do
+  gem 'core-test'
+  gem 'tony'
+end
+
 group :development do
   source 'https://www.rubygems.org' do
     gem 'rake'
@@ -21,7 +26,6 @@ group :development do
 
   source 'https://www.jubigems.org' do
     gem 'rakegem'
-    gem 'tony'
   end
 end
 
