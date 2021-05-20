@@ -22,6 +22,7 @@ module Tony
           @page.driver.save_screenshot(tmp_file(filename), { full: true })
 
           unless File.exist?(golden_file(filename))
+            warn("Golden not found for for: #{filename}".red)
             Goldens.mark_failure(Failure.new(golden: golden_file(filename),
                                              new: tmp_file(filename)))
             return
