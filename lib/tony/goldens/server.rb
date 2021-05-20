@@ -42,6 +42,7 @@ module Tony
 
           app.post('/accept', ->(req, resp) {
             failure = failures[req.params[:index].to_i]
+            FileUtils.mkdir_p(File.dirname(failure.golden))
             FileUtils.mv(failure.new, failure.golden)
             resp.status = 201
             resp.write("Accepting: #{req.params[:index]}")
