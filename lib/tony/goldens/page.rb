@@ -56,7 +56,7 @@ module Tony
         class Failure
           attr_accessor :name, :golden, :new
 
-          def initialize(name, golden:, new:)
+          def initialize(name:, golden:, new:)
             @name = name
             @golden = File.expand_path(golden)
             @new = File.expand_path(new)
