@@ -23,7 +23,8 @@ module Tony
 
           unless File.exist?(golden_file(filename))
             warn("Golden not found for for: #{filename}".red)
-            Goldens.mark_failure(Failure.new(golden: golden_file(filename),
+            Goldens.mark_failure(Failure.new(name: filename,
+                                             golden: golden_file(filename),
                                              new: tmp_file(filename)))
             return
           end
@@ -33,7 +34,8 @@ module Tony
           return if golden_bytes == new_bytes
 
           warn("Golden match failed for: #{filename}".red)
-          Goldens.mark_failure(Failure.new(golden: golden_file(filename),
+          Goldens.mark_failure(Failure.new(name: filename,
+                                           golden: golden_file(filename),
                                            new: tmp_file(filename)))
           return unless ENV.fetch('FAIL_ON_GOLDEN', false)
 
@@ -52,9 +54,10 @@ module Tony
         end
 
         class Failure
-          attr_accessor :golden, :new
+          attr_accessor :name, :golden, :new
 
-          def initialize(golden:, new:)
+          def initialize(name, golden:, new:)
+            @name = name
             @golden = File.expand_path(golden)
             @new = File.expand_path(new)
           end

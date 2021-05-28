@@ -3,6 +3,11 @@ body {
   color: white;
 }
 
+p.name {
+  font-size: 2em;
+  font-weight: bold;
+}
+
 div.images {
   border: 1px solid pink;
   display: flex;
