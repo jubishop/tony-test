@@ -1,3 +1,4 @@
+require 'core/test'
 require 'puma'
 require 'puma/configuration'
 require 'puma/events'
@@ -10,7 +11,7 @@ module Tony
     module Goldens
       class Server
         def initialize(failures)
-          return if failures.empty?
+          return if failures.empty? || github_actions?
 
           app = Tony::App.new
           slim = Tony::Slim.new(views: __dir__)

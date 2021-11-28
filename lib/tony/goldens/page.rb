@@ -1,4 +1,3 @@
-require 'core/test'
 require 'colorize'
 
 module Tony
@@ -15,8 +14,6 @@ module Tony
         end
 
         def verify(filename)
-          return if github_actions?
-
           return if ENV.fetch('CHROME_DEBUG', false)
 
           expect(@page).to(have_googlefonts)
