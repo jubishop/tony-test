@@ -1,4 +1,5 @@
 require 'colorize'
+require 'core/test'
 
 module Tony
   module Test
@@ -6,6 +7,7 @@ module Tony
       class Page
         include ::Capybara::RSpecMatchers
         include ::RSpec::Matchers
+        include ::Test::Env
 
         def initialize(page, goldens_folder = 'spec/goldens')
           @page = page
@@ -50,7 +52,11 @@ module Tony
         end
 
         def tmp_file(filename)
-          return File.join(Dir.tmpdir, "#{filename}.png")
+          return File.join(tmp_dir, "#{filename}.png")
+        end
+
+        def tmp_dir
+          return github_actions? ? 'spec/goldens/failures' : Dir.tmpdir
         end
 
         class Failure
