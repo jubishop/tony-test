@@ -15,6 +15,8 @@ module Tony
         def verify(filename)
           return if ENV.fetch('CHROME_DEBUG', false)
 
+          puts Dir.tmpdir
+
           expect(@page).to(have_googlefonts)
 
           @page.driver.save_screenshot(tmp_file(filename), { full: true })
