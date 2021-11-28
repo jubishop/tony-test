@@ -10,6 +10,8 @@ module Tony
   module Test
     module Goldens
       class Server
+        include ::Test::Env
+
         def initialize(failures)
           return if failures.empty? || github_actions?
 

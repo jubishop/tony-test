@@ -6,7 +6,6 @@ module Tony
       class Page
         include ::Capybara::RSpecMatchers
         include ::RSpec::Matchers
-        include ::Test::Env
 
         def initialize(page, goldens_folder = 'spec/goldens')
           @page = page
