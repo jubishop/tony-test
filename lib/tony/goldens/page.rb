@@ -19,6 +19,7 @@ module Tony
 
           expect(@page).to(have_googlefonts)
 
+          Dir.mkdir(tmp_dir) unless File.exist?(tmp_dir)
           @page.driver.save_screenshot(tmp_file(filename), { full: true })
 
           unless File.exist?(golden_file(filename))
