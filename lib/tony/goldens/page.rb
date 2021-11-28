@@ -56,7 +56,9 @@ module Tony
         end
 
         def tmp_dir
-          return github_actions? ? 'spec/goldens/failures' : Dir.tmpdir
+          return Dir.tmpdir unless github_actions?
+
+          File.join(@goldens_folder, 'failures')
         end
 
         class Failure
