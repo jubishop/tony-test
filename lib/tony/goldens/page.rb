@@ -38,7 +38,7 @@ module Tony
           Goldens.mark_failure(Failure.new(name: filename,
                                            golden: golden_file(filename),
                                            new: tmp_file(filename)))
-          return unless ENV.fetch('FAIL_ON_GOLDEN', false)
+          return unless ENV.fetch('FAIL_ON_GOLDEN', false) || github_actions?
 
           raise ::RSpec::Expectations::ExpectationNotMetError,
                 "#{filename} does not match"
