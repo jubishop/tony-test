@@ -38,6 +38,7 @@ module Tony
 
           if ENV.key?('GOLDENS_PIXEL_TOLERANCE')
             difference = pixel_diff(tmp_file(filename), golden_file(filename))
+            warn("Pixel difference of #{difference}% for #{filename}")
             return if difference < ENV.fetch('GOLDENS_PIXEL_TOLERANCE').to_f
           end
 
