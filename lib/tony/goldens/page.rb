@@ -37,7 +37,7 @@ module Tony
           return if golden_bytes == new_bytes
 
           if ENV.key?('GOLDENS_PIXEL_TOLERANCE')
-            difference = image_diff(tmp_file(filename), golden_file(filename))
+            difference = pixel_diff(tmp_file(filename), golden_file(filename))
             return if difference < ENV.fetch('GOLDENS_PIXEL_TOLERANCE').to_f
           end
 
