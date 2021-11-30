@@ -86,7 +86,7 @@ module Tony
             }
           }
 
-          return (diff_total / image_one.pixels.length) * 100
+          return ((diff_total / image_one.pixels.length) * 100).round(2)
         end
 
         class Failure
