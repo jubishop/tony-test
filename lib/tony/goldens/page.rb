@@ -1,3 +1,4 @@
+require 'chunky_png'
 require 'colorize'
 require 'core/test'
 
@@ -6,6 +7,7 @@ module Tony
     module Goldens
       class Page
         include ::Capybara::RSpecMatchers
+        include ::ChunkyPNG::Color
         include ::RSpec::Matchers
         include ::Test::Env
 
@@ -23,7 +25,7 @@ module Tony
           @page.driver.save_screenshot(tmp_file(filename), { full: true })
 
           unless File.exist?(golden_file(filename))
-            warn("Golden not found for for: #{filename}".red)
+            warn("Golden not found for: #{filename}".red)
             Goldens.mark_failure(Failure.new(name: filename,
                                              golden: golden_file(filename),
                                              new: tmp_file(filename)))
@@ -33,6 +35,11 @@ module Tony
           golden_bytes = File.read(golden_file(filename), mode: 'rb')
           new_bytes = File.read(tmp_file(filename), mode: 'rb')
           return if golden_bytes == new_bytes
+
+          if ENV.key?('GOLDENS_PIXEL_TOLERANCE')
+            difference = image_diff(tmp_file(filename), golden_file(filename))
+            return if difference < ENV.fetch('GOLDENS_PIXEL_TOLERANCE').to_f
+          end
 
           warn("Golden match failed for: #{filename}".red)
           Goldens.mark_failure(Failure.new(name: filename,
@@ -58,6 +65,27 @@ module Tony
           return Dir.tmpdir unless github_actions?
 
           File.join(@goldens_folder, 'failures')
+        end
+
+        def pixel_diff(file_one, file_two)
+          diff_total = 0
+
+          image_one = ChunkyPNG::Image.from_file(file_one)
+          image_two = ChunkyPNG::Image.from_file(file_two)
+          image_one.height.times { |y|
+            image_one.width.times { |x|
+              pixel_one = image_one.get_pixel(x, y)
+              pixel_two = image_two.get_pixel(x, y)
+              next if pixel_one == pixel_two
+
+              diff_total += Math.sqrt(
+                  ((r(pixel_two) - r(pixel_one))**2) +
+                  ((g(pixel_two) - g(pixel_one))**2) +
+                  ((b(pixel_two) - b(pixel_one))**2)) / Math.sqrt((MAX**2) * 3)
+            }
+          }
+
+          return (diff_total / image_one.pixels.length) * 100
         end
 
         class Failure

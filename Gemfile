@@ -2,6 +2,7 @@ ruby '>= 3'
 source 'https://rubygems.org'
 
 gem 'capybara'
+gem 'chunky_png'
 gem 'colorize'
 gem 'puma'
 gem 'rack'
