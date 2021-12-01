@@ -37,7 +37,7 @@ module Tony
           return if golden_bytes == new_bytes
 
           if ENV.key?('GOLDENS_PIXEL_TOLERANCE')
-            difference = pixel_diff(tmp_file(filename), golden_file(filename))
+            difference = pixel_diff(golden_file(filename), tmp_file(filename))
             warn("Pixel difference of #{difference}% for #{filename}".yellow)
             return if difference < ENV.fetch('GOLDENS_PIXEL_TOLERANCE').to_f
           end
@@ -68,25 +68,17 @@ module Tony
           File.join(@goldens_folder, 'failures')
         end
 
-        def pixel_diff(file_one, file_two)
-          diff_total = 0
+        def pixel_diff(file_before, file_after)
+          img_one = ChunkyPNG::Image.from_file(file_before)
+          img_two = ChunkyPNG::Image.from_file(file_after)
+          return 100 if img_one.dimension != img_two.dimension
 
-          image_one = ChunkyPNG::Image.from_file(file_one)
-          image_two = ChunkyPNG::Image.from_file(file_two)
-          image_one.height.times { |y|
-            image_one.width.times { |x|
-              pixel_one = image_one.get_pixel(x, y)
-              pixel_two = image_two.get_pixel(x, y)
-              next if pixel_one == pixel_two
-
-              diff_total += Math.sqrt(
-                  ((r(pixel_two) - r(pixel_one))**2) +
-                  ((g(pixel_two) - g(pixel_one))**2) +
-                  ((b(pixel_two) - b(pixel_one))**2)) / Math.sqrt((MAX**2) * 3)
-            }
-          }
-
-          return ((diff_total / image_one.pixels.length) * 100).round(2)
+          return ((img_one.pixels.zip(img_two.pixels).sum { |px_one, px_two|
+            Math.sqrt(
+                ((r(px_two) - r(px_one))**2) +
+                ((g(px_two) - g(px_one))**2) +
+                ((b(px_two) - b(px_one))**2)) / Math.sqrt((MAX**2) * 3)
+          } / img_one.area) * 100).round(2)
         end
 
         class Failure
