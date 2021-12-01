@@ -21,7 +21,6 @@ module Tony
 
           expect(@page).to(have_googlefonts)
 
-          Dir.mkdir(tmp_dir) unless File.exist?(tmp_dir)
           @page.driver.save_screenshot(tmp_file(filename), { full: true })
 
           unless File.exist?(golden_file(filename))
@@ -63,9 +62,7 @@ module Tony
         end
 
         def tmp_dir
-          return Dir.tmpdir unless github_actions?
-
-          File.join(@goldens_folder, 'failures')
+          return Dir.tmpdir
         end
 
         def pixel_diff(file_before, file_after)

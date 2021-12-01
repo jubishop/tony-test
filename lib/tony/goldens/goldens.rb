@@ -1,15 +1,30 @@
+require 'core/test'
+require 'fileutils'
 require 'rspec'
 
 module Tony
   module Test
     module Goldens
+      include ::Test::Env
+
       @failures = []
       def self.mark_failure(failure)
         @failures.push(failure)
       end
 
       def self.review_failures
-        Server.new(@failures)
+        return if @failures.empty?
+
+        if github_actions?
+          @failures.each { |failure|
+            golden_folder = File.dirname(failure.golden)
+            failures_folder = File.join(golden_folder, 'failures')
+            FileUtils.mkdir(failures_folder)
+            FileUtils.cp(failure.new, failures_folder)
+          }
+        else
+          Server.new(@failures)
+        end
       end
     end
   end
