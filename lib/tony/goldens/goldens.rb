@@ -5,8 +5,6 @@ require 'rspec'
 module Tony
   module Test
     module Goldens
-      include ::Test::Env
-
       @failures = []
       def self.mark_failure(failure)
         @failures.push(failure)
@@ -15,7 +13,7 @@ module Tony
       def self.review_failures
         return if @failures.empty?
 
-        if github_actions?
+        if ::Test::Env.github_actions?
           @failures.each { |failure|
             golden_folder = File.dirname(failure.golden)
             failures_folder = File.join(golden_folder, 'failures')
