@@ -41,7 +41,7 @@ module Tony
             warn("Pixel difference of #{difference}% for #{filename}".yellow)
             return if difference < tolerance
 
-            warn("Exceeds tolerance of #{tolerance}".red)
+            warn("  - Exceeds tolerance of #{tolerance}%".red)
           end
 
           warn("Golden match failed for: #{filename}".red)
