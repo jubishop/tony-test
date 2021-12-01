@@ -17,7 +17,7 @@ module Tony
           @failures.each { |failure|
             golden_folder = File.dirname(failure.golden)
             failures_folder = File.join(golden_folder, 'failures')
-            FileUtils.mkdir(failures_folder)
+            FileUtils.mkdir_p(failures_folder)
             FileUtils.cp(failure.new, failures_folder)
           }
         else
