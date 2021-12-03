@@ -2,7 +2,7 @@ require 'tony'
 
 module Tony
   module Test
-    module Apparition
+    module Capybara
       module Cookies
         def set_cookie(name, value)
           crypt = Tony::Utils::Crypt.new(cookie_secret)

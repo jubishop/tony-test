@@ -17,7 +17,7 @@ end
 
 ## RSpec
 
-`tony-test` is designed for use with [`RSpec`](https://rspec.info) on top of either [`rack-test`](https://github.com/rack/rack-test) for basic http testing, or [`capybara-apparition`](https://github.com/twalpole/apparition) for testing inside a Chrome browser, with Javascript support and the ability to capture screenshots.
+`tony-test` is designed for use with [`RSpec`](https://rspec.info) on top of either [`rack-test`](https://github.com/rack/rack-test) for basic http testing, or [`capybara`](https://github.com/teamcapybara/capybara) for testing inside a Chrome browser, with Javascript support and the ability to capture screenshots.
 
 ### Rack-Test
 
@@ -65,7 +65,7 @@ RSpec.describe(MyTonyApp, type: :rack_test) {
 }
 ```
 
-### Apparition
+### Capybara
 
 In your `spec_helper.rb`:
 
@@ -75,8 +75,8 @@ require `tony-test`
 # Of course you need to set Capybara.app here and call Capybara.register_driver
 # and anything else to set up Capybara as per its documentation.
 
-RSpec.shared_context(:apparition) do
-  include_context(:tony_apparition)
+RSpec.shared_context(:capybara) do
+  include_context(:tony_capybara)
 
   let(:cookie_secret) {
     # Return the same cookie secret string the app will be using.
@@ -84,7 +84,7 @@ RSpec.shared_context(:apparition) do
 end
 
 RSpec.configure do |config|
-  config.include_context(:apparition, type: :feature)
+  config.include_context(:capybara, type: :feature)
 end
 ```
 
@@ -92,13 +92,13 @@ Now in any individual `_spec.rb` test file:
 
 ```ruby
 
-# `type: :feature` will pull in all the helpers for apparition.
+# `type: :feature` will pull in all the helpers for capybara.
 RSpec.describe(MyTonyApp, type: :feature) {
   it('does something') {
     # You can set cookies
     set_cookie(:key, 'value')
 
-    # Standard stuff you do in apparition
+    # Standard stuff you do in capybara
     visit('/')
 
     # All standard Capybara matchers are available
@@ -129,8 +129,6 @@ RSpec.describe(Poll, type: :feature) {
   goldens.verify('index_page')
 }
 ```
-
-See [`poll_spec`](https://github.com/jubishop/jubivote/blob/main/spec/apparition/poll_spec.rb) in [`JubiVote`](https://github.com/jubishop/jubivote) for a detailed example of this being used.
 
 ## Apps using tony-test
 

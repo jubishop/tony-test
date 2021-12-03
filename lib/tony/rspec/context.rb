@@ -2,9 +2,9 @@ require 'capybara/rspec'
 require 'rack/test'
 require 'rspec'
 
-RSpec.shared_context(:tony_apparition) {
+RSpec.shared_context(:tony_capybara) {
   include Capybara::RSpecMatchers
-  include Tony::Test::Apparition::Cookies
+  include Tony::Test::Capybara::Cookies
 
   before(:each) {
     page.driver.headers = { Origin: 'http://localhost' }
