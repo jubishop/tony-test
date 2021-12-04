@@ -21,7 +21,7 @@ module Tony
             FileUtils.cp(failure.new, failures_folder)
           }
         else
-          Server.new(@failures)
+          Server.new(@failures) unless ENV.fetch('FAIL_ON_GOLDEN', false)
         end
       end
     end
