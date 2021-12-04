@@ -21,7 +21,7 @@ module Tony
 
           expect(@page).to(have_googlefonts)
 
-          @page.driver.save_screenshot(tmp_file(filename), full: true)
+          @page.driver.save_screenshot(tmp_file(filename), selector: 'body')
 
           unless File.exist?(golden_file(filename))
             warn("Golden not found for: #{filename}".red)
