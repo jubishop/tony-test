@@ -1,6 +1,7 @@
 require 'chunky_png'
 require 'colorize'
 require 'core/test'
+require 'fileutils'
 
 module Tony
   module Test
@@ -21,6 +22,7 @@ module Tony
 
           expect(@page).to(have_googlefonts)
 
+          FileUtils.mkdir_p(tmp_dir)
           @page.driver.save_screenshot(tmp_file(filename), full: true)
 
           unless File.exist?(golden_file(filename))
@@ -65,7 +67,7 @@ module Tony
         end
 
         def tmp_dir
-          return Dir.tmpdir
+          return File.join(Dir.tmpdir, @goldens_folder)
         end
 
         def pixel_diff(file_before, file_after)
