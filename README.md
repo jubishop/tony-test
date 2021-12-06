@@ -113,7 +113,9 @@ RSpec.describe(MyTonyApp, type: :feature) {
 
 ### Screenshot Goldens
 
-`tony-test` offers a system for storing "golden" screenshots of your app which it can test for changes during a test run.  (Note, these will automatically skip execution when running inside Github Actions, since the screenshots will differ).  If any screenshots have changed, it will launch its own local `Tony` webserver and open a browser where you can review those changes and choose whether to accept the new images as the new goldens.  If you accept, it will copy the new image into your git repo, overwriting the original.
+`tony-test` offers a system for storing "golden" screenshots of your app which it can test for changes during a test run.  If any screenshots have changed, it will launch its own local `Tony` webserver and open a browser where you can review those changes and choose whether to accept the new images as the new goldens.  If you accept, it will copy the new image into your git repo, overwriting the original.
+
+Note:  Tony-test will always expect the page to `have_googlefonts` before screenshotting any golden.
 
 Example usage:
 
@@ -128,6 +130,47 @@ RSpec.describe(Poll, type: :feature) {
   # If none exists (your first run), it will create one for you.
   goldens.verify('index_page')
 }
+```
+
+#### Screenshot Variance Tolerance
+
+Screenshots may differ slightly from environment to environment.  You can tell `tony-test` to allow a certain amount of variability by setting the `ENV['GOLDENS_PIXEL_TOLERANCE']`.  The value represents a percentage, so `5` means an allowance of 5% difference between the golden and the current screenshot.
+
+#### Hard Failing Screenshots
+
+In some scenarios you may want `tony-test` to hard fail if a golden does not match.  You can enable this by setting `ENV['FAIL_ON_GOLDEN']` to any value.  In `Github Actions` this will happen by default with no need to set any environment value.
+
+#### Saving Screenshots as Artifacts In `Github Actions`
+
+When in `Github Actions`, `tony-test` will save your screenshots in a sub `failures` folder inside your original goldens folder.  You can then add these files to your artifacts so you can view the failures.
+
+#### Full `Github Actions` Example
+
+Here is how you could use all your options to set things up inside `Github Actions`:
+
+```yaml
+- name: Check out code
+  uses: actions/checkout@v2
+- name: Set up Ruby
+  uses: ruby/setup-ruby@v1.87.0
+  with:
+    ruby-version: 3.0.2
+    bundler-cache: true
+- name: Run tests
+  run: |
+    bundle exec rake spec
+  env:
+    APP_ENV: test
+    GOLDENS_PIXEL_TOLERANCE: 0.05
+    RACK_ENV: test
+- name: Upload screenshots
+  uses: actions/upload-artifact@v2
+  if: failure()
+  with:
+    name: golden-failures
+    path: |
+      spec/**/failures/*.png
+    if-no-files-found: ignore
 ```
 
 ## More Documentation
