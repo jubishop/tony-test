@@ -130,11 +130,6 @@ RSpec.describe(Poll, type: :feature) {
 }
 ```
 
-## Apps using tony-test
-
-- [Tony](https://github.com/jubishop/tony)
-- [JubiVote](https://github.com/jubishop/jubivote)
-
 ## More Documentation
 
 - [Rubydoc](https://www.rubydoc.info/github/jubishop/tony-test/master)
