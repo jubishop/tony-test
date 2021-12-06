@@ -115,7 +115,7 @@ RSpec.describe(MyTonyApp, type: :feature) {
 
 `tony-test` offers a system for storing "golden" screenshots of your app which it can test for changes during a test run.  If any screenshots have changed, it will launch its own local `Tony` webserver and open a browser where you can review those changes and choose whether to accept the new images as the new goldens.  If you accept, it will copy the new image into your git repo, overwriting the original.
 
-Note:  Tony-test will always expect the page to `have_googlefonts` before screenshotting any golden.
+Note:  `tony-test` will always expect the page to `have_googlefonts` before screenshotting any golden.
 
 Example usage:
 
