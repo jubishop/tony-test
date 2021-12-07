@@ -17,10 +17,10 @@ module Tony
           @goldens_folder = goldens_folder
         end
 
-        def verify(filename)
+        def verify(filename, expect_google_fonts: true)
           return if ENV.fetch('CHROME_DEBUG', false)
 
-          expect(@page).to(have_googlefonts)
+          expect(@page).to(have_googlefonts) if expect_google_fonts
 
           FileUtils.mkdir_p(tmp_dir)
           @page.driver.save_screenshot(tmp_file(filename), full: true)
