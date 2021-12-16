@@ -115,8 +115,6 @@ RSpec.describe(MyTonyApp, type: :feature) {
 
 `tony-test` offers a system for storing "golden" screenshots of your app which it can test for changes during a test run.  If any screenshots have changed, it will launch its own local `Tony` webserver and open a browser where you can review those changes and choose whether to accept the new images as the new goldens.  If you accept, it will copy the new image into your git repo, overwriting the original.
 
-Note:  `tony-test` by default will always expect the page to `have_googlefonts` before screenshotting any golden.  You can pass `expect_google_fonts: false` to `goldens.verify()` to disable.
-
 Example usage:
 
 ```ruby
@@ -130,6 +128,19 @@ RSpec.describe(Poll, type: :feature) {
   # If none exists (your first run), it will create one for you.
   goldens.verify('index_page')
 }
+```
+
+#### Ensuring Google Fonts are Loaded
+
+`tony-test` by default will always expect the page to `have_googlefonts` before screenshotting any golden.  You can pass `expect_google_fonts: false` to `goldens.verify()` to disable.
+
+In order to have `tony-test` properly wait for Google Fonts to be loaded, you will need to add the CSS class 'google-fonts-loaded' in your markup once fonts have been loaded.  If, for example, you are loading `Fire Sans` with `==google_fonts "Fira Sans"` in your `head` tag, then you will need to add:
+
+```javascript
+javascript:
+  document.fonts.load('1rem "Fira Sans"').then(() => {
+    document.documentElement.classList.add('google-fonts-loaded');
+  });
 ```
 
 #### Screenshot Variance Tolerance
