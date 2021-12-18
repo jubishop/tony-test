@@ -39,9 +39,11 @@ module Tony
 
           if ENV.key?('GOLDENS_PIXEL_TOLERANCE')
             tolerance = ENV.fetch('GOLDENS_PIXEL_TOLERANCE').to_f
-            difference = pixel_diff(golden_file(filename), tmp_file(filename))
-            warn("Pixel difference of #{difference}% for #{filename}".yellow)
-            return if difference < tolerance
+            diff_percent = (total_pixel_difference(
+                golden_file(filename),
+                tmp_file(filename)) * 100).round(2)
+            warn("Pixel difference of #{diff_percent}% for #{filename}".yellow)
+            return if diff_percent < tolerance
 
             warn("  - Exceeds tolerance of #{tolerance}%".red)
           end
@@ -70,17 +72,19 @@ module Tony
           return File.join(Dir.tmpdir, @goldens_folder)
         end
 
-        def pixel_diff(file_before, file_after)
+        def total_pixel_difference(file_before, file_after)
           img_one = ChunkyPNG::Image.from_file(file_before)
           img_two = ChunkyPNG::Image.from_file(file_after)
           return 100 if img_one.dimension != img_two.dimension
 
-          return ((img_one.pixels.zip(img_two.pixels).sum { |px_one, px_two|
-            pixel_score(px_one, px_two)
-          } / img_one.area) * 100).round(2)
+          return img_one.pixels.zip(img_two.pixels).sum { |px_one, px_two|
+            single_pixel_diff(px_one, px_two)
+          } / img_one.area
         end
 
-        def pixel_score(px_one, px_two)
+        def single_pixel_difference(px_one, px_two)
+          return 1.0 unless px_one && px_two
+
           return Math.sqrt(
               ((r(px_two) - r(px_one))**2) +
               ((g(px_two) - g(px_one))**2) +
