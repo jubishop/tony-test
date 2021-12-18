@@ -130,11 +130,11 @@ RSpec.describe(Poll, type: :feature) {
 }
 ```
 
-#### Ensuring Google Fonts are Loaded
-
-`tony-test` by default will always expect the page to `have_googlefonts` before screenshotting any golden.  You can pass `expect_googlefonts: false` to `goldens.verify()` to disable.
+#### Ensuring Google Fonts and Fontawesome are Loaded
 
 `tony-test` by default will always expect the page to `have_fontawesome` before screenshotting any golden.  You can pass `expect_fontawesome: false` to `goldens.verify()` to disable.
+
+`tony-test` by default will always expect the page to `have_googlefonts` before screenshotting any golden.  You can pass `expect_googlefonts: false` to `goldens.verify()` to disable.
 
 In order to have `tony-test` properly wait for Google Fonts to be loaded, you will need to add the CSS class `google-fonts-loaded` in your markup once fonts have been loaded.  If, for example, you are loading `Fira Sans` with `==google_fonts "Fira Sans"` in your `head` tag, then you will need to add:
 
