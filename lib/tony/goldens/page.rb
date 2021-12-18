@@ -90,7 +90,7 @@ module Tony
           return 100 if img_one.dimension != img_two.dimension
 
           return img_one.pixels.zip(img_two.pixels).sum { |px_one, px_two|
-            single_pixel_diff(px_one, px_two)
+            single_pixel_difference(px_one, px_two)
           } / img_one.area
         end
 
