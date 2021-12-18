@@ -6,23 +6,22 @@ body {
 p.name {
   font-size: 2em;
   font-weight: bold;
+  margin: 1em 0 0 1em;
 }
 
 div.images {
-  border: 1px solid pink;
+  border-top: 1px solid pink;
+  border-bottom: 1px solid pink;
   display: flex;
-  margin: 1em;
+  gap: 1em;
+  margin: 0.5em 1em 1em 1em;
   padding: 1em;
 }
 
 div.images img {
-  display: block;
   border: 1px solid skyblue;
+  display: block;
   width: 480px;
-}
-
-div.images .golden, div.images .new {
-  margin: 0 0.5em;
 }
 
 button.reject, button.accept {
