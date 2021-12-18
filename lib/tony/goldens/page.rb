@@ -76,11 +76,15 @@ module Tony
           return 100 if img_one.dimension != img_two.dimension
 
           return ((img_one.pixels.zip(img_two.pixels).sum { |px_one, px_two|
-            Math.sqrt(
-                ((r(px_two) - r(px_one))**2) +
-                ((g(px_two) - g(px_one))**2) +
-                ((b(px_two) - b(px_one))**2)) / Math.sqrt((MAX**2) * 3)
+            pixel_score(px_one, px_two)
           } / img_one.area) * 100).round(2)
+        end
+
+        def pixel_score(px_one, px_two)
+          return Math.sqrt(
+              ((r(px_two) - r(px_one))**2) +
+              ((g(px_two) - g(px_one))**2) +
+              ((b(px_two) - b(px_one))**2)) / Math.sqrt((MAX**2) * 3)
         end
 
         class Failure
