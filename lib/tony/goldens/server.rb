@@ -43,7 +43,6 @@ module Tony
             FileUtils.mkdir_p(File.dirname(failure.golden))
             FileUtils.mv(failure.new, failure.golden)
             resp.status = 201
-            resp.write("Accepting: #{req.params[:index]}")
           })
 
           events.on_booted {

@@ -19,6 +19,9 @@ module Tony
             failures_folder = File.join(golden_folder, 'failures')
             FileUtils.mkdir_p(failures_folder)
             FileUtils.cp(failure.new, failures_folder)
+            diffs_folder = File.join(golden_folder, 'diffs')
+            FileUtils.mkdir_p(diffs_folder)
+            FileUtils.cp(failure.diff, diffs_folder)
           }
         else
           Server.new(@failures) unless ENV.fetch('FAIL_ON_GOLDEN', false)

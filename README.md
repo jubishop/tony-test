@@ -153,7 +153,7 @@ In some scenarios you may want `tony-test` to hard fail if a golden does not mat
 
 #### Saving Screenshots as Artifacts In `Github Actions`
 
-When in `Github Actions`, `tony-test` will save your screenshots in a sub `failures` folder inside your original goldens folder.  You can then add these files to your artifacts so you can view the failures.
+When in `Github Actions`, `tony-test` will save your screenshots in a sub `failures` folder inside your original goldens folder.  It will also generate and save a "diff" image visualizing the differences in a `diffs` folder.  You can then add these files to your artifacts so you can view the failures.
 
 #### Full `Github Actions` Example
 
@@ -181,6 +181,7 @@ Here is how you could use all your options to set things up inside `Github Actio
     name: golden-failures
     path: |
       spec/**/failures/*.png
+      spec/**/diffs/*.png
     if-no-files-found: ignore
 ```
 
