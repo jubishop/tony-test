@@ -12,8 +12,9 @@ html lang="en"
         .golden
           ==image_tag(failure.golden, alt: 'Golden')
           button.reject type="submit" value=index Keep Old
-        .diff
-          ==image_tag(failure.diff, alt: 'Diff')
+        - if failure.diff
+          .diff
+            ==image_tag(failure.diff, alt: 'Diff')
         .new
           ==image_tag(failure.new, alt: 'New')
           button.accept type="submit" value=index Accept New

@@ -127,11 +127,11 @@ module Tony
         class Failure
           attr_accessor :name, :golden, :new, :diff
 
-          def initialize(name:, golden:, new:, diff:)
+          def initialize(name:, golden:, new:, diff: nil)
             @name = name
             @golden = File.expand_path(golden)
             @new = File.expand_path(new)
-            @diff = File.expand_path(diff)
+            @diff = File.expand_path(diff) if diff
           end
         end
       end
