@@ -130,13 +130,13 @@ RSpec.describe(Poll, type: :feature) {
 }
 ```
 
-#### Ensuring Google Fonts and Fontawesome are Loaded
+#### Ensuring Fontawesome is Loaded
 
-`tony-test` by default will always expect the page to `have_fontawesome` before screenshotting any golden.  You can pass `expect_fontawesome: false` to `goldens.verify()` to disable.
+`tony-test` by default will always expect the page to `have_fontawesome` before screenshotting any golden.  In particular it will wait for the `SVG` version of fontawesome to load by watching for the class `fontawesome-i2svg-complete`.  If you're not using `fontawesome`, you can pass `expect_fontawesome: false` to `goldens.verify()` to disable.
 
-`tony-test` by default will always expect the page to `have_googlefonts` before screenshotting any golden.  You can pass `expect_googlefonts: false` to `goldens.verify()` to disable.
+#### Ensuring Google Fonts are Loaded
 
-In order to have `tony-test` properly wait for Google Fonts to be loaded, you will need to add the CSS class `google-fonts-loaded` in your markup once fonts have been loaded.  If you are loading your google fonts directly in CSS and they will be guaranteed to be loaded, simply add the class `google-fonts-loaded` directly to your `<body>` tag.  If you need to watch for it to be loaded, you could use the [CSS Font Loading API](https://developer.mozilla.org/en-US/docs/Web/API/CSS_Font_Loading_API).
+`tony-test` by default will always expect the page to `have_googlefonts` before screenshotting any golden.  In particular it will wait for the CSS class `google-fonts-loaded`.  If you are loading your google fonts directly in CSS and they will be guaranteed to be loaded, simply add the class `google-fonts-loaded` directly to your `<body>` tag.  If you need to watch for it to be loaded, you could use the [CSS Font Loading API](https://developer.mozilla.org/en-US/docs/Web/API/CSS_Font_Loading_API).  If you're not using `Google Fonts`, you can pass `expect_googlefonts: false` to `goldens.verify()` to disable.
 
 #### Screenshot Variance Tolerance
 
