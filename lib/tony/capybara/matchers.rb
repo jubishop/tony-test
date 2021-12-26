@@ -8,10 +8,6 @@ module Tony
         def have_fontawesome
           have_selector(:css, '.fontawesome-i2svg-complete')
         end
-
-        def have_googlefonts
-          have_selector(:css, '.google-fonts-loaded')
-        end
         # rubocop:enable Naming/PredicateName
       end
     end

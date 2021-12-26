@@ -17,10 +17,9 @@ module Tony
           @goldens_folder = goldens_folder
         end
 
-        def verify(filename, expect_googlefonts: true, expect_fontawesome: true)
+        def verify(filename, expect_fontawesome: true)
           return if ENV.fetch('CHROME_DEBUG', false)
 
-          expect(@page).to(have_googlefonts) if expect_googlefonts
           expect(@page).to(have_fontawesome) if expect_fontawesome
 
           FileUtils.mkdir_p(tmp_dir)
