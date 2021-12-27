@@ -1,4 +1,4 @@
-ruby '>= 3'
+ruby '>= 3.0.2'
 source 'https://rubygems.org'
 
 gem 'capybara'
@@ -9,6 +9,7 @@ gem 'rack'
 gem 'rack-contrib'
 gem 'rack-test'
 gem 'rspec'
+gem 'tzinfo'
 
 source 'https://www.jubigems.org' do
   gem 'core-test'
