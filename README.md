@@ -60,6 +60,9 @@ RSpec.describe(MyTonyApp, type: :rack_test) {
 
     # You can wait until fontawesome has loaded.
     expect(last_response.body).to(have_fontawesome)
+
+    # You can wait until the timezone has been loaded.
+    expect(last_response.body.to(have_timezone)
   }
 }
 ```
@@ -105,6 +108,9 @@ RSpec.describe(MyTonyApp, type: :feature) {
 
     # You can wait until fontawesome has loaded.
     expect(page).to(have_fontawesome)
+
+    # You can wait until the timezone has been loaded.
+    expect(last_response.body.to(have_timezone)
   }
 }
 ```

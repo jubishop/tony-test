@@ -8,6 +8,10 @@ module Tony
         def have_fontawesome
           have_selector(:css, '.fontawesome-i2svg-complete')
         end
+
+        def have_timezone
+          have_selector('.timezone-loaded')
+        end
         # rubocop:enable Naming/PredicateName
       end
     end
