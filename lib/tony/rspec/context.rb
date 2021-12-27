@@ -20,6 +20,7 @@ RSpec.shared_context(:tony_rack_test) {
   include Capybara::RSpecMatchers
   include Rack::Test::Methods
   include Tony::Test::Rack::Cookies
+  include Tony::Test::Rack::Slim
 
   after(:each) {
     clear_cookies

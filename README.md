@@ -64,6 +64,21 @@ RSpec.describe(MyTonyApp, type: :rack_test) {
     # You can wait until the timezone has been loaded.
     expect(last_response.body.to(have_timezone)
   }
+
+  # You can simply assert a slim template is rendered with specific params.
+  it('just tests a slim render is called') {
+    # `param:` and `another:` must be passed to the template.
+    # note you can use RSpec matchers here, like `an_instance_of`.
+    expect_slim(:template_name, param: 'one', another: 'two')
+    get '/'
+  }
+
+  # You can also pass `views:` and `layout:` to insist the slim template
+  # used includes a specific layout and a specific views directory.
+  it('tests a slim render has specific view and layout') {
+    expect_slim(:template_name, views: 'view_dir', layout: 'our_layout_file')
+    get '/'
+  }
 }
 ```
 
