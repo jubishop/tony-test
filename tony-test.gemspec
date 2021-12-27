@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name          = 'tony-test'
-  spec.version       = '0.60'
+  spec.version       = '0.61'
   spec.summary       = %q(Helpers for testing Tony.)
   spec.authors       = ['Justin Bishop']
   spec.email         = ['jubishop@gmail.com']
@@ -23,5 +23,5 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency('rack-contrib')
   spec.add_runtime_dependency('rack-test')
   spec.add_runtime_dependency('rspec')
-  spec.add_runtime_dependency('tzinfo')
+
 end
