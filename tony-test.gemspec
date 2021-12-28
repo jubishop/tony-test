@@ -23,5 +23,4 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency('rack-contrib')
   spec.add_runtime_dependency('rack-test')
   spec.add_runtime_dependency('rspec')
-
 end
