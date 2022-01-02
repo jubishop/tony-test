@@ -26,8 +26,8 @@ module Tony
           @page.driver.save_screenshot(tmp_file(filename), full: true)
 
           unless File.exist?(golden_file(filename))
-            warn("Golden not found for: #{filename}".red)
-            Goldens.mark_failure(Failure.new(name: filename,
+            warn("Golden not found for: #{file_id(filename)}".red)
+            Goldens.mark_failure(Failure.new(name: file_id(filename),
                                              golden: golden_file(filename),
                                              new: tmp_file(filename)))
             return
@@ -53,8 +53,8 @@ module Tony
           FileUtils.mkdir_p(diff_dir)
           difference_image(golden_img, tmp_img).save(diff_file(filename))
 
-          warn("Golden match failed for: #{filename}".red)
-          Goldens.mark_failure(Failure.new(name: golden_file(filename),
+          warn("Golden match failed for: #{file_id(filename)}".red)
+          Goldens.mark_failure(Failure.new(name: file_id(filename),
                                            golden: golden_file(filename),
                                            new: tmp_file(filename),
                                            diff: diff_file(filename)))
@@ -65,6 +65,10 @@ module Tony
         end
 
         private
+
+        def file_id(filename)
+          return File.join(@goldens_folder, filename)
+        end
 
         def golden_file(filename)
           return File.join(@goldens_folder, "#{filename}.png")
