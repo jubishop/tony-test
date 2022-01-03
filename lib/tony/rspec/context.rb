@@ -5,6 +5,7 @@ require 'rspec'
 RSpec.shared_context(:tony_capybara) {
   include Capybara::RSpecMatchers
   include Tony::Test::Capybara::Cookies
+  include Tony::Test::RSpec::Slim
 
   before(:each) {
     page.driver.headers = { Origin: 'http://localhost' }
@@ -20,7 +21,7 @@ RSpec.shared_context(:tony_rack_test) {
   include Capybara::RSpecMatchers
   include Rack::Test::Methods
   include Tony::Test::Rack::Cookies
-  include Tony::Test::Rack::Slim
+  include Tony::Test::RSpec::Slim
 
   after(:each) {
     clear_cookies

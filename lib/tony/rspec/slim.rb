@@ -2,7 +2,7 @@ require 'tony'
 
 module Tony
   module Test
-    module Rack
+    module RSpec
       module Slim
         def expect_slim(template, views: nil, layout: nil, **attributes)
           original_render = Tony::Slim.instance_method(:render)
