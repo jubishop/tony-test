@@ -13,7 +13,7 @@ module Tony
       def self.review_failures
         return if @failures.empty?
 
-        if ::Test::Env.github_actions?
+        if ENV.fetch('FAIL_ON_GOLDEN', false) || ::Test::Env.github_actions?
           @failures.each { |failure|
             golden_folder = File.dirname(failure.golden)
             failures_folder = File.join(golden_folder, 'failures')
@@ -24,7 +24,7 @@ module Tony
             FileUtils.cp(failure.diff, diffs_folder)
           }
         else
-          Server.new(@failures) unless ENV.fetch('FAIL_ON_GOLDEN', false)
+          Server.new(@failures)
         end
       end
     end

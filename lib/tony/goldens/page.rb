@@ -54,6 +54,7 @@ module Tony
           difference_image(golden_img, tmp_img).save(diff_file(filename))
 
           warn("Golden match failed for: #{file_id(filename)}".red)
+          puts("Page body is: #{@page.body}")
           Goldens.mark_failure(Failure.new(name: file_id(filename),
                                            golden: golden_file(filename),
                                            new: tmp_file(filename),
