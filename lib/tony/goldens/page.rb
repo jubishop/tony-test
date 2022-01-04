@@ -7,9 +7,7 @@ module Tony
   module Test
     module Goldens
       class Page
-        include ::Capybara::RSpecMatchers
         include ::ChunkyPNG::Color
-        include ::RSpec::Matchers
         include ::Test::Env
 
         def initialize(page, goldens_folder = 'spec/goldens')
