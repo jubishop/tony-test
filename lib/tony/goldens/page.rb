@@ -17,10 +17,8 @@ module Tony
           @goldens_folder = goldens_folder
         end
 
-        def verify(filename, expect_fontawesome: true)
+        def verify(filename)
           return if ENV.fetch('CHROME_DEBUG', false)
-
-          expect(@page).to(have_fontawesome) if expect_fontawesome
 
           FileUtils.mkdir_p(tmp_dir)
           @page.driver.save_screenshot(tmp_file(filename), full: true)

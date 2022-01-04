@@ -153,10 +153,6 @@ RSpec.describe(Poll, type: :feature) {
 }
 ```
 
-#### Ensuring Fontawesome is Loaded
-
-`tony-test` by default will always expect the page to `have_fontawesome` before screenshotting any golden.  In particular it will wait for the `SVG` version of fontawesome to load by watching for the class `fontawesome-i2svg-complete`.  If you're not using `fontawesome`, you can pass `expect_fontawesome: false` to `goldens.verify()` to disable.
-
 #### Screenshot Variance Tolerance
 
 Screenshots may differ slightly from environment to environment.  You can tell `tony-test` to allow a certain amount of variability by setting the `ENV['GOLDENS_PIXEL_TOLERANCE']`.  The value represents a percentage, so `5` means an allowance of 5% difference between the golden and the current screenshot.

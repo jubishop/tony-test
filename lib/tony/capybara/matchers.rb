@@ -6,7 +6,7 @@ module Tony
       module Matchers
         # rubocop:disable Naming/PredicateName
         def have_fontawesome
-          have_selector(:css, '.fontawesome-i2svg-complete')
+          have_selector('.fontawesome-i2svg-complete')
         end
 
         def have_timezone
