@@ -15,7 +15,7 @@ module Tony
           @goldens_folder = goldens_folder
         end
 
-        def verify(filename)
+        def verify(filename, pixel_tolerance: 0)
           return if ENV.fetch('CHROME_DEBUG', false)
 
           FileUtils.mkdir_p(tmp_dir)
@@ -37,7 +37,10 @@ module Tony
           tmp_img = ChunkyPNG::Image.from_file(tmp_file(filename))
 
           if ENV.key?('GOLDENS_PIXEL_TOLERANCE')
-            tolerance = ENV.fetch('GOLDENS_PIXEL_TOLERANCE').to_f
+            tolerance = [
+              ENV.fetch('GOLDENS_PIXEL_TOLERANCE').to_f, pixel_tolerance
+            ].max
+
             diff_percent = (total_pixel_difference(
                 golden_img, tmp_img) * 100).round(2)
             warn("Pixel difference of #{diff_percent}% for #{filename}".yellow)

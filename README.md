@@ -157,6 +157,8 @@ RSpec.describe(Poll, type: :feature) {
 
 Screenshots may differ slightly from environment to environment.  You can tell `tony-test` to allow a certain amount of variability by setting the `ENV['GOLDENS_PIXEL_TOLERANCE']`.  The value represents a percentage, so `5` means an allowance of 5% difference between the golden and the current screenshot.
 
+You can also increase the tolerance on a specific golden by passing `pixel_tolerance:` to a call to `goldens.verify()`
+
 #### Hard Failing Screenshots
 
 In some scenarios you may want `tony-test` to hard fail if a golden does not match.  You can enable this by setting `ENV['FAIL_ON_GOLDEN']` to any value.  In `Github Actions` this will happen by default with no need to set any environment value.
