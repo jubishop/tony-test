@@ -18,9 +18,21 @@ module Tony
   end
 end
 
+module TryMatcher
+  def try
+    10.times {
+      return true if yield
+
+      sleep(0.1)
+    }
+    return false
+  end
+end
+
 RSpec::Matchers.define(:have_focus) { |_|
+  include TryMatcher
   match { |actual|
-    actual.evaluate_script('document.activeElement') == actual
+    try { actual.evaluate_script('document.activeElement') == actual }
   }
 }
 
