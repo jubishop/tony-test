@@ -1,4 +1,5 @@
 require 'capybara/rspec'
+require 'capybara'
 
 module Tony
   module Test
@@ -19,8 +20,8 @@ module Tony
 end
 
 module TryMatcher
-  def try
-    10.times {
+  def try(wait: Capybara.default_max_wait_time)
+    (wait * 10).times {
       return true if yield
 
       sleep(0.1)
@@ -29,10 +30,12 @@ module TryMatcher
   end
 end
 
-RSpec::Matchers.define(:have_focus) { |_|
+RSpec::Matchers.define(:have_focus) { |wait: Capybara.default_max_wait_time|
   include TryMatcher
   match { |actual|
-    try { actual.evaluate_script('document.activeElement') == actual }
+    try(wait: wait) {
+      actual.evaluate_script('document.activeElement') == actual
+    }
   }
 }
 
