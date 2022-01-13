@@ -1,5 +1,5 @@
-require 'capybara/rspec'
 require 'capybara'
+require 'capybara/rspec'
 
 module Tony
   module Test
@@ -19,16 +19,9 @@ module Tony
   end
 end
 
-module TryMatcher
-  def try(wait: Capybara.default_max_wait_time)
-    (wait * 10).times {
-      return true if yield
+Capybara::RSpecMatchers.include(Tony::Test::Capybara::Matchers)
 
-      sleep(0.1)
-    }
-    return false
-  end
-end
+require_relative 'try_matcher'
 
 RSpec::Matchers.define(:have_focus) { |wait: Capybara.default_max_wait_time|
   include TryMatcher
@@ -38,5 +31,3 @@ RSpec::Matchers.define(:have_focus) { |wait: Capybara.default_max_wait_time|
     }
   }
 }
-
-Capybara::RSpecMatchers.include(Tony::Test::Capybara::Matchers)
