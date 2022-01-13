@@ -31,3 +31,12 @@ RSpec::Matchers.define(:have_focus) { |wait: Capybara.default_max_wait_time|
     }
   }
 }
+
+RSpec::Matchers.define(:be_disabled) { |wait: Capybara.default_max_wait_time|
+  include TryMatcher
+  match { |actual|
+    try(wait: wait) {
+      actual[:disabled]
+    }
+  }
+}
