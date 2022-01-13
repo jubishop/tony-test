@@ -130,6 +130,9 @@ RSpec.describe(MyTonyApp, type: :feature) {
 
     # You can wait until the timezone has been loaded.
     expect(last_response.body.to(have_timezone)
+
+    # There's a custom matcher to see if a given element has focus.
+    expect(page.find('#my-element')).to(have_focus)
   }
 }
 ```

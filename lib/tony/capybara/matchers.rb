@@ -18,4 +18,10 @@ module Tony
   end
 end
 
+RSpec::Matchers.define(:have_focus) { |_|
+  match { |actual|
+    actual.evaluate_script('document.activeElement') == actual
+  }
+}
+
 Capybara::RSpecMatchers.include(Tony::Test::Capybara::Matchers)
