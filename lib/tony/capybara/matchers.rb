@@ -40,3 +40,26 @@ RSpec::Matchers.define(:be_disabled) { |wait: Capybara.default_max_wait_time|
     }
   }
 }
+
+RSpec::Matchers.define(:be_visible) { |wait: Capybara.default_max_wait_time|
+  include TryMatcher
+  match { |actual|
+    try(wait: wait) {
+      actual.visible?
+    }
+  }
+}
+
+RSpec::Matchers.define(:be_gone) { |wait: Capybara.default_max_wait_time|
+  include TryMatcher
+  match { |actual|
+    try(wait: wait) {
+      begin
+        actual.visible?
+      rescue StandardError => error
+        return true if error.class.name.include?('ObsoleteNode')
+      end
+      return false
+    }
+  }
+}
