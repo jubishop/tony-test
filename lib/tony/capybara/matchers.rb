@@ -30,6 +30,11 @@ RSpec::Matchers.define(:have_focus) { |wait: Capybara.default_max_wait_time|
       actual.evaluate_script('document.activeElement') == actual
     }
   }
+  match_when_negated { |actual|
+    try(wait: wait) {
+      actual.evaluate_script('document.activeElement') != actual
+    }
+  }
 }
 
 RSpec::Matchers.define(:be_disabled) { |wait: Capybara.default_max_wait_time|
@@ -39,6 +44,11 @@ RSpec::Matchers.define(:be_disabled) { |wait: Capybara.default_max_wait_time|
       actual[:disabled]
     }
   }
+  match_when_negated { |actual|
+    try(wait: wait) {
+      !actual[:disabled]
+    }
+  }
 }
 
 RSpec::Matchers.define(:be_visible) { |wait: Capybara.default_max_wait_time|
@@ -46,6 +56,11 @@ RSpec::Matchers.define(:be_visible) { |wait: Capybara.default_max_wait_time|
   match { |actual|
     try(wait: wait) {
       actual.visible?
+    }
+  }
+  match_when_negated { |actual|
+    try(wait: wait) {
+      !actual.visible?
     }
   }
 }
