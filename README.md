@@ -131,11 +131,13 @@ RSpec.describe(MyTonyApp, type: :feature) {
     # You can wait until the timezone has been loaded.
     expect(last_response.body.to(have_timezone)
 
-    # There's a custom matcher to see if an input element has focus.
+    # There's several custom matcher for capybara elements.
+    # Each will wait the `Capybara.default_max_wait_time` or take a `wait:`
+    # parameter for custom wait lengths.
     expect(page.find('#my-input-element')).to(have_focus)
-
-    # There's a custom matcher to see if a button is disabled.
     expect(page.find('#my-button')).to(be_disabled)
+    expect(page.find('#my-element')).to(be_visible)
+    expect(page.find('#my-element')).to(be_gone)
   }
 }
 ```
