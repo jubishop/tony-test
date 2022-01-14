@@ -3,11 +3,12 @@ require 'rspec/expectations'
 module RSpec
   module Matchers
     def try(wait: Capybara.default_max_wait_time)
-      (wait * 10).times {
+      start_time = ::Time.now
+      # rubocop:disable Style/WhileUntilModifier
+      while ::Time.now - start_time < wait
         return true if yield
-
-        sleep(0.1)
-      }
+      end
+      # rubocop:enable Style/WhileUntilModifier
       return false
     end
   end
