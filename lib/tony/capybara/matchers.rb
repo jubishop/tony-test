@@ -72,9 +72,10 @@ RSpec::Matchers.define(:be_gone) { |wait: Capybara.default_max_wait_time|
       begin
         actual.visible?
       rescue StandardError => error
-        return true if error.class.name.include?('ObsoleteNode')
+        error.class.name.include?('ObsoleteNode')
+      else
+        false
       end
-      return false
     }
   }
 }
