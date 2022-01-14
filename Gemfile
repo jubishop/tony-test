@@ -9,6 +9,7 @@ gem 'rack'
 gem 'rack-contrib'
 gem 'rack-test'
 gem 'rspec'
+gem 'rspec-expectations'
 
 source 'https://www.jubigems.org' do
   gem 'core-test'
