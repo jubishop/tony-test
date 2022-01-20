@@ -76,6 +76,12 @@ RSpec.describe(MyTonyApp, type: :rack_test) {
     get '/'
   }
 
+  # You can assert a slim template is rendered with any params
+  it('just tests any slim render is called with template') {
+    expect_any_slim(:my_template)
+    get '/'
+  }
+
   # You can also pass the specific keys `layout:` and `views:` to insist the
   # slim template includes a specific layout and comes from a specific views
   # directory.
