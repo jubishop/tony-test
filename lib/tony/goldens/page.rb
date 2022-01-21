@@ -16,7 +16,8 @@ module Tony
         end
 
         def verify(filename, pixel_tolerance: 0)
-          return if ENV.fetch('CHROME_DEBUG', false)
+          return if ENV.fetch('CHROME_DEBUG', false) ||
+                    ENV.fetch('SKIP_GOLDENS', false)
 
           FileUtils.mkdir_p(tmp_dir)
           @page.driver.save_screenshot(tmp_file(filename), full: true)

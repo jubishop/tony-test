@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name          = 'tony-test'
-  spec.version       = '0.84'
+  spec.version       = '0.85'
   spec.summary       = %q(Helpers for testing Tony.)
   spec.authors       = ['Justin Bishop']
   spec.email         = ['jubishop@gmail.com']
