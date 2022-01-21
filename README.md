@@ -177,6 +177,10 @@ You can also increase the tolerance on a specific golden by passing `pixel_toler
 
 In some scenarios you may want `tony-test` to hard fail if a golden does not match.  You can enable this by setting `ENV['FAIL_ON_GOLDEN']` to any value.  In `Github Actions` this will happen by default with no need to set any environment value.
 
+#### Skipping Screenshot Tests
+
+In some scenarios you may want your capybara tests to run but just auto-pass all your calles to `goldens.verify()`.  In this case you can set `ENV['SKIP_GOLDENS']` to any value.
+
 #### Saving Screenshots as Artifacts In `Github Actions`
 
 When in `Github Actions`, `tony-test` will save your screenshots in a sub `failures` folder inside your original goldens folder.  It will also generate and save a "diff" image visualizing the differences in a `diffs` folder.  You can then add these files to your artifacts so you can view the failures.
