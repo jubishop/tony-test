@@ -39,6 +39,8 @@ module Tony
 
           diff_percent = (total_pixel_difference(
               golden_img, tmp_img) * 100).round(2)
+          return if diff_percent.zero?
+
           warn("Pixel difference of #{diff_percent}% for #{filename}".yellow)
 
           if ENV.key?('GOLDENS_PIXEL_TOLERANCE')
