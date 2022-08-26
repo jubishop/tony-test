@@ -37,14 +37,14 @@ module Tony
           golden_img = ChunkyPNG::Image.from_file(golden_file(filename))
           tmp_img = ChunkyPNG::Image.from_file(tmp_file(filename))
 
+          diff_percent = (total_pixel_difference(
+              golden_img, tmp_img) * 100).round(2)
+          warn("Pixel difference of #{diff_percent}% for #{filename}".yellow)
+
           if ENV.key?('GOLDENS_PIXEL_TOLERANCE')
             tolerance = [
               ENV.fetch('GOLDENS_PIXEL_TOLERANCE').to_f, pixel_tolerance
             ].max
-
-            diff_percent = (total_pixel_difference(
-                golden_img, tmp_img) * 100).round(2)
-            warn("Pixel difference of #{diff_percent}% for #{filename}".yellow)
             return if diff_percent < tolerance
 
             warn("  - Exceeds tolerance of #{tolerance}%".red)
