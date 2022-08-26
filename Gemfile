@@ -11,7 +11,7 @@ gem 'rack-test'
 gem 'rspec'
 gem 'rspec-expectations'
 
-source 'https://www.jubigems.org' do
+source 'http://www.jubigems.org' do
   gem 'core-test'
   gem 'tony'
 end
@@ -23,7 +23,7 @@ group :development do
   gem 'rubocop-rake'
   gem 'rubocop-rspec'
 
-  source 'https://www.jubigems.org' do
+  source 'http://www.jubigems.org' do
     gem 'rakegem'
   end
 end
